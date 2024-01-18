@@ -1,3 +1,4 @@
 {
-  "name": "@codewithcheese/pkg-2"
+  "name": "@pnpm-changesets-example/pkg-2",
+  "version": "0.0.0"
 }
