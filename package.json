@@ -1,7 +1,7 @@
 {
   "name": "pnpm-changesets-example",
   "scripts": {
-    "ci:publish": "pnpm publish -r --dry-run"
+    "ci:publish": "pnpm publish -r --dry-run --no-git-checks --access public"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1"

@@ -6,6 +6,7 @@ on:
 env:
   CI: true
   PNPM_CACHE_FOLDER: .pnpm-store
+permissions: write-all
 jobs:
   version:
     timeout-minutes: 15
@@ -19,10 +20,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
       - name: install pnpm
         run: npm i pnpm@latest -g
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
       - name: install dependencies
@@ -33,6 +33,7 @@ jobs:
           version: pnpm changeset version
           commit: "ci: update versions"
           title: "ci: update versions"
-          publish: pnpm ci:publish
+          publish: pnpm run ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
